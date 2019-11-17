@@ -30,14 +30,27 @@ class CreatePost extends Component {
         });
     }
 
+    // ????
+    fetchPosts() {}
+
     handleSubmit() {
+        event.preventDefault();
         if (!this.state.valid) {
             return;
         }
+        if (this.props.onSubmit) {
+            const newPost = {
+                date: Date.now(),
+                id: Date.now(),
+                content: this.state.content,
+            };
 
-        const newPost = {
-            content: this.state.content,
-        };
+            this.props.onSubmit(newPost);
+            this.setState({
+                content: '',
+                valid: null,
+            });
+        }
     }
 
     render () {

@@ -9,6 +9,7 @@ import Loader from './components/Loader';
 
 import * as API from './shared/http';
 import Ad from './components/ad/Ad';
+import CreatePost from './components/post/Create';
 import Post from './components/post/Post';
 import Welcome from './components/welcome/Welcome';
 
@@ -60,11 +61,20 @@ class App extends Component {
     }
 
     createNewPost(post) {
-        this.setState(prevState => {
-            return {
-                posts: orderBy(prevState.posts.concat(newPost), 'date', 'desc')
-            };
-        })
+        return API.createPost(post)
+            .then(res => res.json())
+            .then(newPost => {
+                console.log('before');
+                this.setState( prevState => {
+                    console.log('after');
+                    return {
+                        posts: orderBy(prevState.posts.concat(newPost), 'date', 'desc')
+                    };
+                });
+            })
+            .catch(err => {
+                this.setState(() => ({ error: err }));
+            });
     }
     render() {
         if (this.state.error) {
