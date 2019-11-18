@@ -30,6 +30,8 @@ class App extends Component {
                 .ENDPOINT}/posts?_page=1&_sort=date&_order=DESC&_embed=comments&_expand=user&_embed=likes`,
         };
         this.getPosts = this.getPosts.bind(this);
+        // https://stackoverflow.com/questions/45943299/reactjs-setstate-is-not-a-function
+        this.createNewPost = this.createNewPost.bind(this);
     }
     static propTypes = {
         children: PropTypes.node,
