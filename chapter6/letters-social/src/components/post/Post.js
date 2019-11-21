@@ -7,6 +7,7 @@ import Image from "./Image";
 import Link from "./Link";
 import PostActionSection from "./PostActionSection";
 import Comments from "../comment/Comments";
+import DisplayMap from "../map/DisplayMap";
 import UserHeader from "../post/UserHeader";
 import Loader from "../Loader";
 
@@ -54,6 +55,7 @@ export class Post extends Component {
                 <Content post={this.state.post} />
                 <Image post={this.state.post} />
                 <Link link={this.state.post.link} />
+                {this.state.post.location && <DisplayMap location={this.state.post.location} />}
                 <PostActionSection showComments={this.state.showComments} />
                 <Comments
                     comments={this.state.comments}
