@@ -1,3 +1,6 @@
+import PropTypes from 'prop-types';
+
+import React, { Component } from 'react';
 import enroute from 'enroute';
 import invariant from 'invariant';
 
@@ -5,14 +8,15 @@ export default class Router extends Component {
     static propTypes = {
         // children: this.propTypes.object,
         // location: this.propTypes.string.isRequired
-        children: this.propTypes.element.isRequired,
-        location: this.propTypes.string.isRequired,
+        children: PropTypes.array,
+        location: PropTypes.string.isRequired
     };
 
     constructor(props) {
         super(props);
         this.routes = {};
 
+        this.addRoutes(props.children);
         this.router = enroute(this.routes);
     }
 
