@@ -30,7 +30,7 @@ export const renderApp = (state, callback = () => {}) => {
                 <Route path="/" component={Home} />
                 <Route path="/posts/:postId" component={SinglePost} />
                 {/* <Route path="/login" component={Login} /> */}
-                {/* <Route path="*" component={NotFound} /> */}
+                <Route path="*" component={NotFound} />
             </Route>
         </Router>,
         // Render app to target DOM element in index.html.

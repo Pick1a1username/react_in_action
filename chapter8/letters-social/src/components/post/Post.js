@@ -11,7 +11,9 @@ import DisplayMap from "../map/DisplayMap";
 import UserHeader from "../post/UserHeader";
 import Loader from "../Loader";
 
-export class Post extends Component {
+import RouterLink from '../router/Link';
+
+class Post extends Component {
     static propTypes = {
         post: PropTypes.shape({
             comments: PropTypes.array,
@@ -51,16 +53,20 @@ export class Post extends Component {
         }
         return (
             <div className="post">
-                <UserHeader date={this.state.post.date} user={this.state.post.user} />
-                <Content post={this.state.post} />
-                <Image post={this.state.post} />
-                <Link link={this.state.post.link} />
+                {/* Wrap section of Post component you want to be linkable and give it the right ID. */}
+                <RouterLink to={`/posts/${this.state.post.id}`}>
+                    <UserHeader date={this.state.post.date} user={this.state.post.user} />
+                    <Content post={this.state.post} />
+                    <Image post={this.state.post} />
+                    <Link link={this.state.post.link} />
+                </RouterLink>
                 {this.state.post.location && <DisplayMap location={this.state.post.location} />}
                 <PostActionSection showComments={this.state.showComments} />
                 <Comments
                     comments={this.state.comments}
                     show={this.state.showComments}
                     post={this.state.post}
+                    handleSubmit={this.createComment}
                     user={this.props.user}
                 />
             </div>
